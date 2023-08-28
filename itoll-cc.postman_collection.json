@@ -1,0 +1,435 @@
+{
+	"info": {
+		"_postman_id": "0a65fc33-8528-4c82-b4c9-d8c426eb7294",
+		"name": "itoll-cc",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "submit",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var payload = JSON.parse(responseBody);",
+							"postman.setEnvironmentVariable(\"order_code\", payload.data.result[\"order_code\"]);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "default"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					},
+					{
+						"key": "token",
+						"value": "{{invoker_tokern}}",
+						"description": "invoker_tokern",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"origin\": \"35.758099,51.409934\",\n    \"origin_address\": \"vanak sq.\",\n    \"client_name\": \"snapp\",\n    \"client_mobile\": \"09034050206\",\n    \"destination\": \"35.806855,51.428421\",\n    \"destination_address\": \"tajrish sq.\",\n    \"receiver_name\": \"pasargad\",\n    \"receiver_mobile\": \"09012023030\"\n}\n"
+				},
+				"url": {
+					"raw": "{{base_url}}/api/v1/order/submit",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"order",
+						"submit"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "available",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var payload = JSON.parse(responseBody);",
+							"postman.setEnvironmentVariable(\"order_code\", payload.data.result[\"order_code\"]);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "default"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					},
+					{
+						"key": "token",
+						"value": "{{courier_token}}",
+						"description": "courier_token",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/api/v1/order/available",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"order",
+						"available"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "inquire",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var payload = JSON.parse(responseBody);",
+							"postman.setEnvironmentVariable(\"order_code\", payload.data.result[\"order_code\"]);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "default"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					},
+					{
+						"key": "token",
+						"value": "{{invoker_tokern}}",
+						"description": "invoker_token",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/api/v1/order/inquire/179735fd-55fc-4437-8400-c84668e2784b",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"order",
+						"inquire",
+						"179735fd-55fc-4437-8400-c84668e2784b"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "approve",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "default"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					},
+					{
+						"key": "token",
+						"value": "{{courier_token}}",
+						"description": "courier_token",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/api/v1/order/approve/:uuid",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"order",
+						"approve",
+						":uuid"
+					],
+					"variable": [
+						{
+							"key": "uuid",
+							"value": "{{order_code}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "receive",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "default"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					},
+					{
+						"key": "token",
+						"value": "{{courier_token}}",
+						"description": "courier_token",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/api/v1/order/receive/:uuid",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"order",
+						"receive",
+						":uuid"
+					],
+					"variable": [
+						{
+							"key": "uuid",
+							"value": "{{order_code}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deliver",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "default"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					},
+					{
+						"key": "token",
+						"value": "{{courier_token}}",
+						"description": "courier_token",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/api/v1/order/deliver/:uuid",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"order",
+						"deliver",
+						":uuid"
+					],
+					"variable": [
+						{
+							"key": "uuid",
+							"value": "{{order_code}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "reject",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "default"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					},
+					{
+						"key": "token",
+						"value": "{{courier_token}}",
+						"description": "courier_token",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/api/v1/order/reject/:uuid",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"order",
+						"reject",
+						":uuid"
+					],
+					"variable": [
+						{
+							"key": "uuid",
+							"value": "{{order_code}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "reclaim",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "default"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					},
+					{
+						"key": "token",
+						"value": "{{invoker_tokern}}",
+						"description": "invoker_token",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/api/v1/order/reclaim/:uuid",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"order",
+						"reclaim",
+						":uuid"
+					],
+					"variable": [
+						{
+							"key": "uuid",
+							"value": "{{order_code}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "revoke",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "default"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					},
+					{
+						"key": "token",
+						"value": "{{invoker_tokern}}",
+						"description": "invoker_tokern",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/api/v1/order/revoke/:uuid",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"order",
+						"revoke",
+						":uuid"
+					],
+					"variable": [
+						{
+							"key": "uuid",
+							"value": "{{order_code}}"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "localhost:8000"
+		},
+		{
+			"key": "courier_token",
+			"value": "OFd5UzBza014c2luSU95RkNwbkszeWJVOVFGTG55TXBfMg=="
+		}
+	]
+}
